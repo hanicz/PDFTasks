@@ -35,9 +35,9 @@ class MergeControllerTest {
         mockPdfFiles.add(new MockMultipartFile("pdfs", "input1.pdf", "application/pdf", "mock pdf content".getBytes()));
         mockPdfFiles.add(new MockMultipartFile("pdfs", "input2.pdf", "application/pdf", "mock pdf content".getBytes()));
         byte[] mockMergedPDF = "mock merged pdf content".getBytes();
-        when(mergeService.mergePDFS(anyList())).thenReturn(mockMergedPDF);
+        when(this.mergeService.mergePDFS(anyList())).thenReturn(mockMergedPDF);
 
-        ResponseEntity<byte[]> response = mergeController.mergePdfs(mockPdfFiles);
+        ResponseEntity<byte[]> response = this.mergeController.mergePdfs(mockPdfFiles);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("inline; filename=merged.pdf", response.getHeaders().getFirst("Content-Disposition"));

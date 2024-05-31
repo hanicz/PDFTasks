@@ -12,13 +12,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.multipart.MultipartFile;
 import pdf.tasks.exception.FileException;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -43,6 +43,9 @@ class MergeServiceTest {
         byte[] result = this.mergeService.mergePDFS(mockFiles);
 
         assertNotNull(result);
+        PDDocument resultDoc = PDDocument.load(new ByteArrayInputStream(result));
+        assertEquals(2, resultDoc.getNumberOfPages());
+        resultDoc.close();
     }
 
     @Test
@@ -53,6 +56,16 @@ class MergeServiceTest {
         when(this.fileService.isValid(any(MultipartFile.class))).thenReturn(false);
 
         assertThrows(FileException.class, () -> this.mergeService.mergePDFS(mockFiles));
+    }
+
+    @Test
+    public void testMergePDFSIOException() {
+        List<MultipartFile> mockFiles = new ArrayList<>();
+        mockFiles.add(new MockMultipartFile("files", "input1.pdf", "application/pdf", "mock pdf content".getBytes()));
+        mockFiles.add(new MockMultipartFile("files", "input2.pdf", "application/pdf", "mock pdf content".getBytes()));
+        when(this.fileService.isValid(any(MultipartFile.class))).thenReturn(true);
+
+        assertThrows(FileException.class, () ->this.mergeService.mergePDFS(mockFiles));
     }
 
     private MultipartFile createBlankPdf() throws IOException {

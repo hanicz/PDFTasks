@@ -31,9 +31,9 @@ class PdfControllerTest {
         MultipartFile mockPdfFile = new MockMultipartFile("pdfFile", "input.pdf", "application/pdf", "mock pdf content".getBytes());
         Integer[] mockPages = {1, 3};
         byte[] mockRemovedPdf = "mock removed pdf content".getBytes();
-        when(pdfService.removePages(any(MultipartFile.class), any(Integer[].class))).thenReturn(mockRemovedPdf);
+        when(this.pdfService.removePages(any(MultipartFile.class), any(Integer[].class))).thenReturn(mockRemovedPdf);
 
-        ResponseEntity<byte[]> response = pdfController.removePages(mockPdfFile, mockPages);
+        ResponseEntity<byte[]> response = this.pdfController.removePages(mockPdfFile, mockPages);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("inline; filename=removed.pdf", response.getHeaders().getFirst("Content-Disposition"));
@@ -45,9 +45,9 @@ class PdfControllerTest {
         MultipartFile mockPdfFile = new MockMultipartFile("pdfFile", "input.pdf", "application/pdf", "mock pdf content".getBytes());
         int mockPage = 2;
         byte[] mockOnePagedPdf = "mock one paged pdf content".getBytes();
-        when(pdfService.keepOnePage(any(MultipartFile.class), any(Integer.class))).thenReturn(mockOnePagedPdf);
+        when(this.pdfService.keepOnePage(any(MultipartFile.class), any(Integer.class))).thenReturn(mockOnePagedPdf);
 
-        ResponseEntity<byte[]> response = pdfController.keepOnePage(mockPdfFile, mockPage);
+        ResponseEntity<byte[]> response = this.pdfController.keepOnePage(mockPdfFile, mockPage);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("inline; filename=one_page.pdf", response.getHeaders().getFirst("Content-Disposition"));

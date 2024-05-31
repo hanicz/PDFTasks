@@ -19,7 +19,7 @@ class ExceptionAdviceTest {
     public void testHandleFileException() {
         FileException fileException = new FileException("Test File Exception");
 
-        ResponseEntity<ErrorResponse> responseEntity = exceptionAdvice.handleFileException(fileException);
+        ResponseEntity<ErrorResponse> responseEntity = this.exceptionAdvice.handleFileException(fileException);
 
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
         assertEquals(HttpStatus.BAD_REQUEST.value(), Objects.requireNonNull(responseEntity.getBody()).code());
