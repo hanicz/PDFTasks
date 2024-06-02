@@ -14,7 +14,7 @@ import java.util.Collections;
 
 @Service
 @Slf4j
-public class PdfService {
+public class PageService {
 
     @Autowired
     private FileService fileService;
@@ -57,5 +57,4 @@ public class PdfService {
             throw new FileException("Unable to remove pages", e);
         }
     }
-
 }

@@ -21,13 +21,13 @@ import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
-class PdfServiceTest {
+class PageServiceTest {
 
     @Mock
     private FileService fileService;
 
     @InjectMocks
-    private PdfService pdfService;
+    private PageService pageService;
 
     @Test
     void removePages() throws IOException {
@@ -35,7 +35,7 @@ class PdfServiceTest {
         when(this.fileService.isValid(multipartFile)).thenReturn(true);
         Integer[] pagesToDelete = {1};
 
-        byte[] result = this.pdfService.removePages(multipartFile, pagesToDelete);
+        byte[] result = this.pageService.removePages(multipartFile, pagesToDelete);
 
         assertNotNull(result);
         PDDocument resultDoc = PDDocument.load(new ByteArrayInputStream(result));
@@ -50,7 +50,7 @@ class PdfServiceTest {
         Integer[] pagesToDelete = {1};
 
         assertThrows(FileException.class, () -> {
-            this.pdfService.removePages(multipartFile, pagesToDelete);
+            this.pageService.removePages(multipartFile, pagesToDelete);
         });
     }
 
@@ -61,7 +61,7 @@ class PdfServiceTest {
         Integer[] pagesToDelete = {100};
 
         assertThrows(FileException.class, () -> {
-            this.pdfService.removePages(multipartFile, pagesToDelete);
+            this.pageService.removePages(multipartFile, pagesToDelete);
         });
     }
 
@@ -70,7 +70,7 @@ class PdfServiceTest {
         MultipartFile multipartFile = this.createBlankPdf();
         when(this.fileService.isValid(multipartFile)).thenReturn(true);
         int page = 1;
-        byte[] result = pdfService.keepOnePage(multipartFile, page);
+        byte[] result = pageService.keepOnePage(multipartFile, page);
 
         assertNotNull(result);
         PDDocument resultDoc = PDDocument.load(new ByteArrayInputStream(result));
@@ -85,7 +85,7 @@ class PdfServiceTest {
         int page = 1;
 
         assertThrows(FileException.class, () -> {
-            this.pdfService.keepOnePage(multipartFile, page);
+            this.pageService.keepOnePage(multipartFile, page);
         });
     }
 
@@ -96,7 +96,7 @@ class PdfServiceTest {
         int page = 100;
 
         assertThrows(FileException.class, () -> {
-            this.pdfService.keepOnePage(multipartFile, page);
+            this.pageService.keepOnePage(multipartFile, page);
         });
     }
 
