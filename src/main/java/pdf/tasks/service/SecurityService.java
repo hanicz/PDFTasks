@@ -30,8 +30,8 @@ public class SecurityService {
             pdfDoc.save(decryptedPdf);
             return decryptedPdf.toByteArray();
         } catch (IOException e) {
-            log.error("Unable to remove pages", e);
-            throw new FileException("Unable to remove pages", e);
+            log.error("Unable to remove password", e);
+            throw new FileException("Unable to remove password", e);
         }
     }
 
@@ -46,8 +46,8 @@ public class SecurityService {
             pdfDoc.save(decryptedPdf);
             return decryptedPdf.toByteArray();
         } catch (IOException e) {
-            log.error("Unable to remove pages", e);
-            throw new FileException("Unable to remove pages", e);
+            log.error("Unable to add password", e);
+            throw new FileException("Unable to add password", e);
         }
     }
 
