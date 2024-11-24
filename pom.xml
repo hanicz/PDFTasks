@@ -5,17 +5,22 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.4.0</version>
+		<relativePath/>
 	</parent>
 	<groupId>pdf.tasks</groupId>
 	<artifactId>PDFTasks</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PDFTasks</name>
 	<description>Tasks related to PDF manipulation</description>
+
 	<properties>
 		<java.version>21</java.version>
+		<pdfbox.version>2.0.32</pdfbox.version>
+		<lombok.version>1.18.36</lombok.version>
+		<commons-io.version>2.18.0</commons-io.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -34,19 +39,19 @@
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
-			<version>2.0.31</version>
+			<version>${pdfbox.version}</version>
 		</dependency>
 
 		<!-- Util -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.32</version>
+			<version>${lombok.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.16.1</version>
+			<version>${commons-io.version}</version>
 		</dependency>
 
 		<!-- Test -->
